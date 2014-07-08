@@ -1,0 +1,205 @@
+*tube.txt* *tube*
+
+                                   Tube
+                     Painless MacVim/Terminal interaction
+
+                                     ~
+                              Reference Manual
+
+==============================================================================
+CONTENTS                                                       *tube-contents*
+
+        1. Overview .............................. |tube-overview|
+        2. Basic Usage ........................... |tube-usage|
+        3. Aliasing .............................. |tube-aliasing|
+        4. Commands .............................. |tube-commands|
+        5. Options ............................... |tube-options|
+        6. Credits ............................... |tube-credits|
+        7. License ............................... |tube-license|
+
+
+==============================================================================
+1. Overview                                                    *tube-overview*
+
+Tube provides a tiny interface for sending commands from MacVim to a
+separate iTerm or Terminal window without losing focus of MacVim.
+
+
+==============================================================================
+2. Basic Usage                                                    *tube-usage*
+
+To send commands to a separate terminal window use the |Tube| command:
+>
+    :Tube echo "Hello world!"
+<
+This executes the given command in a separate terminal window without losing
+focus of MacVim. If the window does not exist yet, then it is created.
+
+Some characters have a special meaning and are expanded as described below:
+
+  * `%`: this character is replaced with current buffer name.
+
+  * `@`: this character is replaced with current selection (or the current
+  line if nothing is currently selected).
+
+  * `<cr>`: this character sequence is replaced with a carriage return.
+
+NOTE: if you want to avoid expansion of certain characters escape them
+with a backslash.
+
+
+==============================================================================
+3. Aliasing                                                    *tube-aliasing*
+
+With the option |'g:tube_aliases'| you can set shortcuts for executing
+frequently executed commands.
+>
+    let g:tube_aliases = {
+        \ "cmd1": "long command",
+        \ "cmd2": "very long command",
+    \ }
+<
+To execute an aliased command use the |TubeAlias| command:
+>
+    :TubeAlias cmd1
+<
+To see what aliases are currently set, you can use the command |TubeAliases|
+
+
+==============================================================================
+4. Commands                                                    *tube-commands*
+
+------------------------------------------------------------------------------
+:Tube [command]                                                         *Tube*
+
+Execute the command in the separate iTerm (or Terminal) window without losing
+focus of MacVim. If the that window does not exist yet, then it is created.
+
+Some characters have as a special meaning and are expanded as described below:
+
+  * `%`: this character is replaced with current buffer name.
+
+  * `@`: this character is replaced with current selection (or the current
+  line if nothing is currently selected).
+
+  * `<cr>`: this character sequence is replaced with a carriage return.
+
+NOTE: if you want to avoid expansion of certain characters escape them
+with a backslash.
+
+------------------------------------------------------------------------------
+:TubeClr [command]                                                   *TubeClr*
+
+Works as the |Tube| command but force the terminal to clear its screen before
+executing the command.
+
+------------------------------------------------------------------------------
+:TubeLastCmd                                                     *TubeLastCmd*
+
+Executes the last executed command.
+
+------------------------------------------------------------------------------
+:TubeInterrupt                                                 *TubeInterrupt*
+
+Interrupt the current running command by triggering CTRL+C inside the terminal.
+
+------------------------------------------------------------------------------
+:TubeCd                                                               *TubeCd*
+
+'cd's into the container directory of the current buffer.
+
+------------------------------------------------------------------------------
+:TubeFocus                                                         *TubeFocus*
+
+Gives focus to the terminal window.
+
+------------------------------------------------------------------------------
+:TubeClose                                                         *TubeClose*
+
+Closes the terminal.
+
+------------------------------------------------------------------------------
+:TubeAlias [alias]                                                 *TubeAlias*
+
+Executes the command associated with the given alias name. The alias must be
+defined with the |'tube_aliases'| option.
+
+------------------------------------------------------------------------------
+:TubeAliasClr                                                   *TubeAliasClr*
+
+Works as the |TubeAlias| command but force the terminal to clear its screen
+before executing the command associated with the alias.
+
+------------------------------------------------------------------------------
+:TubeAliases                                                     *TubeAliases*
+
+Show all defined aliases.
+
+
+==============================================================================
+5. Options                                                      *tube-options*
+
+------------------------------------------------------------------------------
+                                                             *'tube_terminal'*
+
+Use this option to set the terminal emulator of your choice. At the moment
+only iTerm and Terminal are supported.
+
+Default: 'terminal' (values: 'iterm' or 'terminal')
+
+------------------------------------------------------------------------------
+                                                  *'tube_always_clear_screen'*
+
+Set this option this to 0 to force the terminal to clear its screen whenever
+a command is executed.
+
+Default: 0
+
+------------------------------------------------------------------------------
+                                                              *'tube_aliases'*
+
+With this dictionary you can set your own aliases for commands. Use the alias
+name as dictionary key and the command as value. Be sure to have unique
+aliases though.
+
+Example:
+>
+    let g:tube_aliases = {
+        \ "cmd1": "long command",
+        \ "cmd2": "very long command",
+    \ }
+<
+
+Default: {}
+
+
+==============================================================================
+6. Credits                                                      *tube-credits*
+
+Author: Giacomo Comitti
+Contributors: https://github.com/gcmt/tube.vim/contributors
+Git repository: https://github.com/gcmt/tube.vim
+
+
+==============================================================================
+7. License                                                      *tube-license*
+
+Copyright (c) 2014 Giacomo Comitti
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
