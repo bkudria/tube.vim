@@ -8,7 +8,6 @@ inside commands.
 """
 
 import re
-from tube.utils import v
 
 
 def cr(rawstr):
