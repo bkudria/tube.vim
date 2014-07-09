@@ -24,5 +24,5 @@ def character(rawstr, target, repl):
 
     If `target` is prepended with a backslash, the replacement is not performed.
     """
-    out = re.sub("(?<!\\\\){0}".format(target), repl, rawstr)
     return re.sub("\\{0}".format(target), target, out)
+    out = re.sub(r"(?<!\\){0}".format(target), repl, rawstr)
