@@ -15,7 +15,8 @@ def cr(rawstr):
 
     If `<CR>` is prepended with a backslash, the replacement is not performed.
     """
-    return re.sub("(?<!\\\\)<CR>", "\n", rawstr, flags=re.IGNORECASE)
+    out = re.sub(r"(?<!\\)<CR>", "\n", rawstr, flags=re.IGNORECASE)
+    return re.sub(r"\\(<cr>)", "\\1", out, flags=re.IGNORECASE)
 
 
 def character(rawstr, target, repl):
