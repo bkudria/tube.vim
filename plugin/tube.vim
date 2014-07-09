@@ -36,7 +36,7 @@ command! -nargs=* -range Tube call tube#ExecuteCommand(<line1>, <line2>, <q-args
 command! -nargs=1 -range TubeAlias call tube#ExecuteAlias(<line1>, <line2>, <q-args>)
 command! -nargs=* -range TubeClr call tube#ExecuteCommandClear(<line1>, <line2>, <q-args>)
 command! -nargs=1 -range TubeAliasClr call tube#ExecuteAliasClear(<line1>, <line2>, <q-args>)
-command! TubeLastCmd call tube#ExecuteLastCommand()
+command! -range TubeLastCmd call tube#ExecuteLastCommand(<line1>, <line2>)
 command! TubeInterrupt call tube#InterruptRunningCommand()
 command! TubeCd call tube#CdIntoCurrentDirectory()
 command! TubeFocus call tube#FocusTerminal()

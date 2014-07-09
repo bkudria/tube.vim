@@ -30,8 +30,8 @@ function! tube#ExecuteCommandClear(start, end, args)
     py _tube.run_command(int(vim.eval('a:start')), int(vim.eval('a:end')), vim.eval('a:args'), clear=True)
 endfunction
 
-function! tube#ExecuteLastCommand()
-    py _tube.run_last_command()
+function! tube#ExecuteLastCommand(start, end)
+    py _tube.run_last_command(int(vim.eval('a:start')), int(vim.eval('a:end')))
 endfunction
 
 function! tube#CdIntoCurrentDirectory()

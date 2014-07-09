@@ -53,10 +53,10 @@ class Tube:
         else:
             v.echo("Alias '{0}' not found.".format(alias))
 
-    def run_last_command(self):
+    def run_last_command(self, start, end):
         """To execute the last executed command."""
         if self.last_command:
-            self.run_command(1, 1, self.last_command)
+            self.run_command(start, end, self.last_command)
         else:
             v.echo("You haven't executed any commands yet")
 
