@@ -58,7 +58,7 @@ class Tube:
         if self.last_command:
             self.run_command(1, 1, self.last_command)
         else:
-            v.echo("It seems that you haven't executed a command yet")
+            v.echo("You haven't executed any commands yet")
 
     def run(self, command, clear=False):
         """To execute the command in the terminal."""
