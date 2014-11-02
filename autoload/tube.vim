@@ -1,5 +1,5 @@
 " ============================================================================
-" File: plugin/tube.vim
+" File: autoload/tube.vim
 " Description: MacVim and terminal interaction made easy
 " Mantainer: Giacomo Comitti - https://github.com/gcmt
 " Url: https://github.com/gcmt/tube.vim
@@ -22,42 +22,42 @@ py _tube = tube.core.Tube()
 " Wrappers
 " ----------------------------------------------------------------------------
 
-function! tube#ExecuteCommand(start, end, args)
+fu! tube#ExecuteCommand(start, end, args)
     py _tube.run_command(int(vim.eval('a:start')), int(vim.eval('a:end')), vim.eval('a:args'))
-endfunction
+endfu
 
-function! tube#ExecuteCommandClear(start, end, args)
+fu! tube#ExecuteCommandClear(start, end, args)
     py _tube.run_command(int(vim.eval('a:start')), int(vim.eval('a:end')), vim.eval('a:args'), clear=True)
-endfunction
+endfu
 
-function! tube#ExecuteLastCommand(start, end)
+fu! tube#ExecuteLastCommand(start, end)
     py _tube.run_last_command(int(vim.eval('a:start')), int(vim.eval('a:end')))
-endfunction
+endfu
 
-function! tube#CdIntoCurrentDirectory()
+fu! tube#CdIntoCurrentDirectory()
     py _tube.cd_into(vim.eval('expand("%:p:h")'))
-endfunction
+endfu
 
-function! tube#FocusTerminal()
+fu! tube#FocusTerminal()
     py _tube.focus_terminal()
-endfunction
+endfu
 
-function! tube#InterruptRunningCommand()
+fu! tube#InterruptRunningCommand()
     py _tube.interrupt_terminal()
-endfunction
+endfu
 
-function! tube#CloseTerminal()
+fu! tube#CloseTerminal()
     py _tube.close_terminal()
-endfunction
+endfu
 
-function! tube#ExecuteAlias(start, end, args)
+fu! tube#ExecuteAlias(start, end, args)
     py _tube.run_alias(int(vim.eval('a:start')), int(vim.eval('a:end')), vim.eval('a:args'))
-endfunction
+endfu
 
-function! tube#ExecuteAliasClear(start, end, args)
+fu! tube#ExecuteAliasClear(start, end, args)
     py _tube.run_alias(int(vim.eval('a:start')), int(vim.eval('a:end')), vim.eval('a:args'), clear=True)
-endfunction
+endfu
 
-function! tube#ShowAliases()
+fu! tube#ShowAliases()
     py _tube.show_aliases()
-endfunction
+endfu
