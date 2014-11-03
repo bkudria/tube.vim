@@ -6,18 +6,19 @@
 " License: MIT
 " ============================================================================
 
-
 " Init
-" ----------------------------------------------------------------------------
+" ============================================================================
 
-if exists("g:tube_loaded") || !has('python') || !has('gui_macvim') || &cp
+if exists("g:tube_loaded") || !has('python') || !has('gui_macvim')
     finish
 endif
 let g:tube_loaded = 1
 
+let s:save_cpo = &cpo
+set cpo&vim
 
 " Options
-" ----------------------------------------------------------------------------
+" ============================================================================
 
 let g:tube_terminal =
     \ get(g:, "tube_terminal", 'terminal')
@@ -28,17 +29,21 @@ let g:tube_always_clear_screen =
 let g:tube_aliases =
     \ get(g:, "tube_aliases",  {})
 
-
 " Commands
-" ----------------------------------------------------------------------------
+" ============================================================================
 
-command! -nargs=* -range Tube call tube#ExecuteCommand(<line1>, <line2>, <q-args>)
-command! -nargs=1 -range TubeAlias call tube#ExecuteAlias(<line1>, <line2>, <q-args>)
-command! -nargs=* -range TubeClr call tube#ExecuteCommandClear(<line1>, <line2>, <q-args>)
-command! -nargs=1 -range TubeAliasClr call tube#ExecuteAliasClear(<line1>, <line2>, <q-args>)
-command! -range TubeLastCmd call tube#ExecuteLastCommand(<line1>, <line2>)
-command! TubeInterrupt call tube#InterruptRunningCommand()
-command! TubeCd call tube#CdIntoCurrentDirectory()
-command! TubeFocus call tube#FocusTerminal()
-command! TubeClose call tube#CloseTerminal()
-command! TubeAliases call tube#ShowAliases()
+com! -nargs=* -range Tube cal tube#ExecuteCommand(<line1>, <line2>, <q-args>)
+com! -nargs=1 -range TubeAlias cal tube#ExecuteAlias(<line1>, <line2>, <q-args>)
+com! -nargs=* -range TubeClr cal tube#ExecuteCommandClear(<line1>, <line2>, <q-args>)
+com! -nargs=1 -range TubeAliasClr cal tube#ExecuteAliasClear(<line1>, <line2>, <q-args>)
+com! -range TubeLastCmd cal tube#ExecuteLastCommand(<line1>, <line2>)
+com! TubeInterrupt cal tube#InterruptRunningCommand()
+com! TubeCd cal tube#CdIntoCurrentDirectory()
+com! TubeFocus cal tube#FocusTerminal()
+com! TubeClose cal tube#CloseTerminal()
+com! TubeAliases cal tube#ShowAliases()
+
+" ============================================================================
+
+let &cpo = s:save_cpo
+unlet s:save_cpo
